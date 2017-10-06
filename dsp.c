@@ -1,29 +1,39 @@
 #include "dsp.h"
 
-int main(int argc, char ** argv) {
-	signal_t s1 = signal(360, 0.1);
-	signal_t s2 = signal(360, 0.1);
-	signal_t s3 = signal(360, 0.1);
+void DFT(char * csv_file) {
+	signal_t s1 = signal(0, 360, 0.25);
+	signal_t s2_re = signal(0, 360, 0.25);
+	signal_t s2_im = signal(0, 360, 0.25);
+	signal_t s2 = signal(0, 360, 0.25);
+	
+	/* Create sinewave */
+	foreach(s1, x, y)	
+		y[xn] = sin(rad(2 * pi * x)) + sin(rad(2 * pi * 2 * x)) + sin(rad(2 * pi * 4 * x));
+	
+	/* Perform DFT */
+	foreach(s2_re, k, y_re) {
+		var(s2_im, y_im);
+		var(s2, y_spectrum);
 
-	foreach(s1, x, y) {
-		var(s2, y2);
-		var(s3, y3);
+		y_re[kn] = 0;
+		y_im[kn] = 0;
 
-		y[xn] = !xn ? 1 : xn % 2 ? -1 : 1;
+		foreach(s1, x, y) {
+			y_re[kn] += y[xn] * cos((pi / s1.sample_count) * x * (kn - (180 / kr)) * 2) / s1.sample_count;
+			y_im[kn] += y[xn] * sin((pi / s1.sample_count) * x * (kn - (180 / kr)) * 2) / s1.sample_count;
+		}
 
-		y2[xn] = sin(rad(3*x));
-
-		if(x < 180)
-			y3[xn] = exp(rad(180-x));
-		else
-			y3[xn] = exp(rad(x-180));
+		y_spectrum[kn] = sqrt(pow(y_re[kn], 2) + pow(y_im[kn], 2));
 	}
 
 	export(s1);
 	export(s2);
-	export(s3);
 
-	export_to_csv("signal_samples.csv");
-	cleanup_dsp();
+	export_to_csv(csv_file);
+	signalgroup_end();
+}
+
+int main(int argc, char ** argv) {
+	DFT(argv[1]);
 	return 0;
 }
