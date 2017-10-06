@@ -20,7 +20,7 @@
 
 #define MAX_SIGNAL_COUNT 16
 
-#define foreach(s, x, y) for(float *y = s.samples, r = s.resolution, x = 0; y <= s.samples; y++) for(int x ## n = 0; x ## n < s.sample_count; x ## n++, x += r)
+#define foreach(s, x, y) for(float *y = s.samples, x ## r = s.resolution, x = 0; y <= s.samples; y++) for(int x ## n = 0; x ## n < s.sample_count; x ## n++, x += x ## r)
 #define var(s,y) float * y = s.samples;
 
 typedef struct {

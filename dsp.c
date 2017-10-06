@@ -11,7 +11,7 @@ int main(int argc, char ** argv) {
 
 		y[xn] = !xn ? 1 : xn % 2 ? -1 : 1;
 
-		y2[xn] = sin(rad(2*x));
+		y2[xn] = sin(rad(3*x));
 
 		if(x < 180)
 			y3[xn] = exp(rad(180-x));
