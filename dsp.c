@@ -9,14 +9,14 @@ int main(int argc, char ** argv) {
 		var(s2, y2);
 		var(s3, y3);
 
-		y[x] = !x ? 1 : x % 2 ? -1 : 1;
+		y[xn] = !xn ? 1 : xn % 2 ? -1 : 1;
 
-		y2[x] = sin(rad(xr));
+		y2[xn] = sin(rad(2*x));
 
-		if(xr < 180)
-			y3[x] = exp(rad(180-xr));
+		if(x < 180)
+			y3[xn] = exp(rad(180-x));
 		else
-			y3[x] = exp(rad(xr-180));
+			y3[xn] = exp(rad(x-180));
 	}
 
 	export(s1);
