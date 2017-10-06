@@ -7,8 +7,8 @@ Simply open the .slx file using Matlab Simulink and run everything from there.
 
 The workflow goes as follows:
 
-1- Add your DSP code into the C file;
-2- Execute the Simulink simulation;
+1- Add your DSP code into the C file;  
+2- Execute the Simulink simulation;  
 3- Analyse results on the simulation.
 
 It's that simple.
